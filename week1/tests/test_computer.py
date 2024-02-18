@@ -4,7 +4,6 @@ from computer import ComputerBuilder
 from memory import RamFactory, RomFactory
 from cpu import CPUFactory
 
-
 @pytest.mark.computer
 class TestComputer:
     def test_laptop(self):
