@@ -9,7 +9,6 @@ class SingleCoreCPU(CPU):
     def process(self, data):
         return [data]
     
-
 class DualCoreCPU(CPU):
     def process(self, data):
         return [data[::2], data[1::2]]
