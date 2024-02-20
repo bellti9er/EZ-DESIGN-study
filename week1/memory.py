@@ -10,10 +10,11 @@ class Memory(ABC):
     @abstractmethod
     def read(self, address):
         pass
-    
+
     @abstractmethod
     def write(self, address, value):
         pass
+
 
 class RAM(Memory):
     def __init__(self, size, data=None):
@@ -21,9 +22,10 @@ class RAM(Memory):
 
     def read(self, address):
         return self.data[address]
-    
+
     def write(self, address, value):
         self.data[address] = value
+
 
 class ROM(Memory):
     def __init__(self, size=None, data=None):
@@ -31,9 +33,10 @@ class ROM(Memory):
 
     def read(self, address):
         return self.data[address]
-    
+
     def write(self, address, value):
         raise ValueError("Can't write to ROM, only read")
+
 
 # MemoryFactory, RamFactory, RomFactory
 class MemoryFactory(ABC):
@@ -41,13 +44,15 @@ class MemoryFactory(ABC):
     def make_memory(size, data):
         pass
 
+
 class RamFactory(MemoryFactory):
     @staticmethod
     def make_memory(size=None, data=None):
         if data is not None:
             raise ValueError("Can't initialize RAM with data")
         return RAM(size=size)
-    
+
+
 class RomFactory(MemoryFactory):
     @staticmethod
     def make_memory(size=None, data=None):
