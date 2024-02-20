@@ -4,11 +4,17 @@ from computer import ComputerBuilder
 from memory import RamFactory, RomFactory
 from cpu import CPUFactory
 
+
 @pytest.mark.computer
 class TestComputer:
     def test_laptop(self):
         builder = ComputerBuilder()
-        computer = builder.set_cpu(type="single").set_ram(size=8).set_rom(data=[1, 2, 3, 4]).build()
+        computer = (
+            builder.set_cpu(type="single")
+            .set_ram(size=8)
+            .set_rom(data=[1, 2, 3, 4])
+            .build()
+        )
         state = computer.bootstrap()
         assert state["cpu_processed"] == [[1, 2, 3, 4]]
         assert state["ram_data"] == [0] * 8
@@ -16,7 +22,12 @@ class TestComputer:
 
     def test_desktop(self):
         builder = ComputerBuilder()
-        computer = builder.set_cpu(type="dual").set_ram(size=16).set_rom(data=[1, 2, 3, 4, 5, 6, 7, 8]).build()
+        computer = (
+            builder.set_cpu(type="dual")
+            .set_ram(size=16)
+            .set_rom(data=[1, 2, 3, 4, 5, 6, 7, 8])
+            .build()
+        )
         state = computer.bootstrap()
         assert state["cpu_processed"] == [[1, 3, 5, 7], [2, 4, 6, 8]]
         assert state["ram_data"] == [0] * 16
@@ -25,7 +36,7 @@ class TestComputer:
     def test_invalid_computer(self):
         builder = ComputerBuilder()
         with pytest.raises(ValueError):
-            computer = builder.build()
+            builder.build()
 
 
 @pytest.mark.memory
