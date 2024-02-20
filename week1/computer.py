@@ -15,18 +15,26 @@ class Computer:
         }
     
 class ComputerBuilder:
-    @staticmethod
-    def build_computer(type):
-        if type == "laptop":
-            cpu = CPUFactory.make_cpu(type="single")
-            ram = RamFactory.make_memory(size=8)
-            rom = RomFactory.make_memory(data=[1, 2, 3, 4])
-        elif type == "desktop":
-            cpu = CPUFactory.make_cpu(type="dual")
-            ram = RamFactory.make_memory(size=16)
-            rom = RomFactory.make_memory(data=[1, 2, 3, 4, 5, 6, 7, 8])
-        else:
-            raise ValueError("Invalid computer type :", type)
-        
-        return Computer(cpu=cpu, ram=ram, rom=rom)
+    def __init__(self):
+        self.cpu = None
+        self.ram = None
+        self.rom = None
+
+    def set_cpu(self, type):
+        self.cpu = CPUFactory.make_cpu(type=type)
+        return self
+
+    def set_ram(self, size):
+        self.ram = RamFactory.make_memory(size=size)
+        return self
+
+    def set_rom(self, data):
+        self.rom = RomFactory.make_memory(data=data)
+        return self
+
+    def build(self):
+        if not self.cpu or not self.ram or not self.rom:
+            raise ValueError("Missing components for Computer construction")
+        return Computer(cpu=self.cpu, ram=self.ram, rom=self.rom)
+
     
