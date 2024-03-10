@@ -1,3 +1,5 @@
+import csv
+
 from crawler_factory import CrawlerFactory
 
 if __name__ == "__main__":
@@ -12,9 +14,21 @@ if __name__ == "__main__":
     musinsa_crawler = CrawlerFactory.get_crawler(
         site_name_musinsa, category_musinsa, file_name_musinsa
     )
-    musinsa_crawler.crawl()
 
-    # wconcept_crawler = CrawlerFactory.get_crawler(
-    #     site_name_wconcept, category_wconcept, file_name_wconcept
-    # )
-    # wconcept_crawler.crawl()
+    with open(file_name_musinsa, mode="w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Brand", "Price"])
+
+        for name, brand, price in musinsa_crawler.generate_items():
+            writer.writerow([name, brand, price])
+
+    wconcept_crawler = CrawlerFactory.get_crawler(
+        site_name_wconcept, category_wconcept, file_name_wconcept
+    )
+
+    with open(file_name_wconcept, mode="w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Brand", "Price"])
+
+        for name, brand, price in wconcept_crawler.generate_items():
+            writer.writerow([name, brand, price])
