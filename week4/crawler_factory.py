@@ -14,7 +14,7 @@ class CrawlerFactory:
     @staticmethod
     def get_crawler(
         site_name: str, category: str, file_name: str
-    ) -> Union[MusinsaCrawler]:
+    ) -> Union[MusinsaCrawler, WconceptCrawler]:
         # Wconcept 크롤링 불가능...
         # options = Options()
         # options.add_argument(

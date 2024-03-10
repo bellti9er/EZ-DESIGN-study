@@ -13,9 +13,7 @@ class MusinsaCrawler:
         self.category: str = category
         self.file_name: str = file_name
         self.limit: int = limit
-        self.base_url: str = (
-            "https://www.musinsa.com/categories/item/{category}?d_cat_cd={category}&brand=&list_kind=small&sort=pop_category&sub_sort=&page={page}&display_cnt=90&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
-        )
+        self.base_url: str = "https://www.musinsa.com/categories/item/{category}?d_cat_cd={category}&brand=&list_kind=small&sort=pop_category&sub_sort=&page={page}&display_cnt=90&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
 
     def generate_items(self) -> Generator[Any, Any, Any]:
         collected: int = 0
